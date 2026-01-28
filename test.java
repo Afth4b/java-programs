@@ -1,51 +1,47 @@
 import java.util.Scanner;
 
-// Step 1: Create Complex class
-class Complex {
-    int real;
-    int imag;
-
-    // Step 2: Constructor
-    Complex(int r, int i) {
-        real = r;
-        imag = i;
-    }
-
-    // Step 3: Method to add two complex numbers
-    Complex add(Complex c) {
-        int realSum = this.real + c.real;
-        int imagSum = this.imag + c.imag;
-        return new Complex(realSum, imagSum);
-    }
-
-    // Step 4: Display method
-    void display() {
-        System.out.println(real + " + " + imag + "i");
-    }
-}
-
-// Step 5: Main class
-public class ComplexAdd {
+public class SymmetricMatrix {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter real part of first complex number: ");
-        int r1 = sc.nextInt();
-        System.out.print("Enter imaginary part of first complex number: ");
-        int i1 = sc.nextInt();
+        int r, c;
+        boolean symmetric = true;
 
-        System.out.print("Enter real part of second complex number: ");
-        int r2 = sc.nextInt();
-        System.out.print("Enter imaginary part of second complex number: ");
-        int i2 = sc.nextInt();
+        System.out.print("Enter number of rows: ");
+        r = sc.nextInt();
 
-        Complex c1 = new Complex(r1, i1);
-        Complex c2 = new Complex(r2, i2);
+        System.out.print("Enter number of columns: ");
+        c = sc.nextInt();
 
-        Complex sum = c1.add(c2);
+        int[][] a = new int[r][c];
 
-        System.out.print("Sum of complex numbers = ");
-        sum.display();
+        // Condition for symmetric matrix
+        if (r != c) {
+            System.out.println("Matrix is NOT Symmetric");
+            return;
+        }
+
+        System.out.println("Enter matrix elements:");
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+
+        // Check symmetry
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < r; j++) {
+                if (a[i][j] != a[j][i]) {
+                    symmetric = false;
+                    break;
+                }
+            }
+        }
+
+        if (symmetric)
+            System.out.println("Matrix is Symmetric");
+        else
+            System.out.println("Matrix is NOT Symmetric");
 
         sc.close();
     }
