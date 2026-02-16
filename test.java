@@ -1,48 +1,60 @@
 import java.util.Scanner;
 
-public class SymmetricMatrix {
+class ArraySearch {
+
+    int[] arr;     // Data member
+    int size;
+
+    // Constructor
+    ArraySearch(int size) {
+        this.size = size;
+        arr = new int[size];
+    }
+
+    // Method to insert elements
+    void insertElements() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter " + size + " elements:");
+
+        for(int i = 0; i < size; i++) {
+            arr[i] = sc.nextInt();
+        }
+    }
+
+    // Method to search element
+    void searchElement(int key) {
+        boolean found = false;
+
+        for(int i = 0; i < size; i++) {
+            if(arr[i] == key) {
+                System.out.println("Element found at position: " + (i + 1));
+                found = true;
+                break;
+            }
+        }
+
+        if(!found) {
+            System.out.println("Element not found in the array.");
+        }
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        int r, c;
-        boolean symmetric = true;
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
 
-        System.out.print("Enter number of rows: ");
-        r = sc.nextInt();
+        // Creating object
+        ArraySearch obj = new ArraySearch(n);
 
-        System.out.print("Enter number of columns: ");
-        c = sc.nextInt();
+        obj.insertElements();
 
-        int[][] a = new int[r][c];
+        System.out.print("Enter element to search: ");
+        int key = sc.nextInt();
 
-        // Condition for symmetric matrix
-        if (r != c) {
-            System.out.println("Matrix is NOT Symmetric");
-            return;
-        }
-
-        System.out.println("Enter matrix elements:");
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                a[i][j] = sc.nextInt();
-            }
-        }
-
-        // Check symmetry
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < r; j++) {
-                if (a[i][j] != a[j][i]) {
-                    symmetric = false;
-                    break;
-                }
-            }
-        }
-
-        if (symmetric)
-            System.out.println("Matrix is Symmetric");
-        else
-            System.out.println("Matrix is NOT Symmetric");
-
-        sc.close();
+        obj.searchElement(key);
     }
 }
