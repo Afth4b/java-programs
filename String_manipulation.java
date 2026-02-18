@@ -26,7 +26,7 @@ public class String_manipulation{
         // System.out.println(result);
 
         System.out.print("Enter another string to compare it : ");
-        str2 = sc.nextLine();
-        
+        String str2 = sc.nextLine();
+        System.out.println(str.equals(str2));
     }
 }
