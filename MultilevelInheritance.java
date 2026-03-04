@@ -21,8 +21,8 @@ public class MultilevelInheritance {
 
         Puppy p = new Puppy();
 
-        p.weep();   // From Puppy
-        p.bark();   // From Dog
-        p.eat();    // From Animal
+        p.weep();   
+        p.bark();   
+        p.eat();  
     }
 }
