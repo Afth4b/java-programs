@@ -1,33 +1,47 @@
 import java.io.*;
-import java.util.*;
 
-public class WriteRead {
-    public static void main(String[] args) {
+public class NumberSeparation {
 
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        System.out.print("Enter the file name: ");
-        String fileName = sc.nextLine();
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
 
-        FileOutputStream fos = new FileOutputStream(fileName);
+        System.out.print("Enter the input file path: ");
+        String inputFile = reader.readLine();
 
-        System.out.print("Enter text: ");
-        String text = sc.nextLine();
+        String evenFile = "even.txt";
+        String oddFile = "odd.txt";
 
-        fos.write(text.getBytes());
-        fos.close();
+        BufferedReader fileReader = new BufferedReader(
+                new FileReader(inputFile));
 
-        FileInputStream fis = new FileInputStream(fileName);
+        BufferedWriter evenWriter = new BufferedWriter(
+                new FileWriter(evenFile));
 
-        byte[] b = new byte[fis.available()];
-        fis.read(b);
-        fis.close();
+        BufferedWriter oddWriter = new BufferedWriter(
+                new FileWriter(oddFile));
 
-        String content = new String(b);
+        String line;
 
-        System.out.println("\nFile Content:");
-        System.out.println(content);
+        while ((line = fileReader.readLine()) != null) {
 
-        sc.close();
+            int number = Integer.parseInt(line);
+
+            if (number % 2 == 0) {
+                evenWriter.write(line);
+                evenWriter.newLine();
+            } else {
+                oddWriter.write(line);
+                oddWriter.newLine();
+            }
+        }
+
+        System.out.println("Even and odd numbers separated successfully.");
+
+        reader.close();
+        fileReader.close();
+        evenWriter.close();
+        oddWriter.close();
     }
 }
