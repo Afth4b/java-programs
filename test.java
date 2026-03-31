@@ -1,103 +1,59 @@
+/*   Define 2 classes; 
+one for generating multiplication table of 5 
+and other for displaying first Nprime numbers.
+ Implement using thread class.*/
+
 import java.util.*;
 
-class nameexception extends RuntimeException {
-    nameexception(String s) {
-        super(s);
-    }
-}
-
-class passexception extends RuntimeException {
-    passexception(String s) {
-        super(s);
-    }
-}
-
-class user {
-    String name, password;
-
-    user(String n, String p) {
-        name = n;
-        password = p;
-    }
-
-    void login(String n, String p) {
-        try {
-            if (name.equals(n) && password.equals(p)) {
-                System.out.println("\t\tLogin successful");
-            } else {
-                throw new passexception("Invalid username or password!!");
-            }
-        } catch (passexception e) {
-            System.out.println("\n" + e.getMessage());
-            System.exit(0);
+class Multiple5 extends Thread{
+    public void run(){
+        for(int i=1; i<=10; i++) {
+            System.out.println(i + " x 5 = " + (i * 5));
         }
     }
 }
 
-class validation {
-    public static void main(String[] args) {
+class Prime extends Thread{
+    int n;
 
+    Prime(int limit){
+        n = limit;
+    }
+
+    boolean isPrime(int num){
+        if(num < 1){
+            return false;
+        }
+
+        for(int i=2; i<= Math.sqrt(num); i++){
+            if(num % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void run(){
+        for(int i=2; i<=n; i++) {
+            if(isPrime(i)){
+                System.out.println("Prime : "+i);
+            }
+        }
+    }
+}
+
+public class MultiPrimeThread{
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter name: ");
-        String s = sc.next();
+        System.out.print("Enter limit for generating primes : ");
+        int n = sc.nextInt();
 
-        try {
-            for (int i = 0; i < s.length(); i++) {
-                char ch = s.charAt(i);
+        Multiple5 t1 = new Multiple5();
+        Prime t2 = new Prime(n);
 
-                if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
-                    continue;
-                } else {
-                    throw new nameexception("Invalid Name");
-                }
-            }
-        } catch (nameexception e) {
-            System.out.println("\n" + e.getMessage());
-            System.exit(0);
-        }
-
-        System.out.print("Enter password: ");
-        String pass = sc.next();
-
-        try {
-            int p = 0;
-
-            if (pass.length() < 8) {
-                throw new nameexception("Password must have 8 characters");
-            }
-
-            for (int i = 0; i < pass.length(); i++) {
-                char ch = pass.charAt(i);
-
-                if (ch >= 48 && ch <= 57) {
-                    p = 1;
-                }
-            }
-
-            if (p == 0) {
-                throw new passexception("Password must contain at least 1 number");
-            }
-
-        } catch (nameexception e) {
-            System.out.println("\n" + e.getMessage());
-            System.exit(0);
-        } catch (passexception e) {
-            System.out.println("\n" + e.getMessage());
-            System.exit(0);
-        }
-
-        user u1 = new user(s, pass);
-
-        System.out.println("\t\tLogin!!");
-
-        System.out.print("Username: ");
-        String n1 = sc.next();
-
-        System.out.print("Password: ");
-        String p1 = sc.next();
-
-        u1.login(n1, p1);
+        t1.start();
+        t2.start();
 
         sc.close();
     }
