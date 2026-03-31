@@ -7,7 +7,7 @@ class nameexception extends RuntimeException {
 }
 
 class passexception extends RuntimeException {
-    passexception(String s) {
+    passexception(String s){
         super(s);
     }
 }
@@ -23,54 +23,52 @@ class user {
     void login(String n, String p) {
         try {
             if (name.equals(n) && password.equals(p)) {
-                System.out.println("\t\tLogin successful");
+                System.out.println("\t\tLogin successfull");
             } else {
                 throw new passexception("Invalid username or password!!");
             }
-        } catch (passexception e) {
+        }catch (passexception e) {
             System.out.println("\n" + e.getMessage());
             System.exit(0);
         }
     }
 }
 
-class validation {
+class emailNameException {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter name: ");
+        System.out.print("Enter name : ");
         String s = sc.next();
 
-        try {
-            for (int i = 0; i < s.length(); i++) {
+        try{
+            for (int i=0; i<s.length();i++) {
                 char ch = s.charAt(i);
 
-                if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
+                if((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)){
                     continue;
-                } else {
+                }else{
                     throw new nameexception("Invalid Name");
                 }
             }
-        } catch (nameexception e) {
+        }catch(nameexception e) {
             System.out.println("\n" + e.getMessage());
             System.exit(0);
         }
 
-        System.out.print("Enter password: ");
+        System.out.print("Enter password : ");
         String pass = sc.next();
 
-        try {
+        try{
             int p = 0;
-
-            if (pass.length() < 8) {
+            if(pass.length() < 8){
                 throw new nameexception("Password must have 8 characters");
             }
 
-            for (int i = 0; i < pass.length(); i++) {
+            for (int i=0; i < pass.length(); i++) {
                 char ch = pass.charAt(i);
 
-                if (ch >= 48 && ch <= 57) {
+                if(ch >= 48 && ch <= 57){
                     p = 1;
                 }
             }
@@ -78,26 +76,25 @@ class validation {
             if (p == 0) {
                 throw new passexception("Password must contain at least 1 number");
             }
-
-        } catch (nameexception e) {
+        }catch (nameexception e){
             System.out.println("\n" + e.getMessage());
             System.exit(0);
-        } catch (passexception e) {
+        }catch (passexception e) {
             System.out.println("\n" + e.getMessage());
             System.exit(0);
         }
 
-        user u1 = new user(s, pass);
+        user u1 = new user(s,pass);
 
-        System.out.println("\t\tLogin!!");
+        System.out.println("\t\tLogin..!!");
 
-        System.out.print("Username: ");
+        System.out.print("Username : ");
         String n1 = sc.next();
 
-        System.out.print("Password: ");
+        System.out.println("Password : ");
         String p1 = sc.next();
 
-        u1.login(n1, p1);
+        u1.login(n1,p1);
 
         sc.close();
     }
