@@ -1,24 +1,20 @@
 import java.util.*;
 
-// Generic Stack Class
 class Stack<T> {
     ArrayList<T> A;
     int top = -1;
     int size;
 
-    // Constructor
     Stack(int size) {
         this.size = size;
         this.A = new ArrayList<T>(size);
     }
 
-    // Push operation
     void push(T X) {
         if (top + 1 == size) {
             System.out.println("Stack Overflow");
         } else {
-            top = top + 1;
-
+            top++;
             if (A.size() > top)
                 A.set(top, X);
             else
@@ -26,7 +22,6 @@ class Stack<T> {
         }
     }
 
-    // Peek (Top element)
     T top() {
         if (top == -1) {
             System.out.println("Stack Underflow");
@@ -36,7 +31,6 @@ class Stack<T> {
         }
     }
 
-    // Pop operation
     void pop() {
         if (top == -1) {
             System.out.println("Stack Underflow");
@@ -45,45 +39,41 @@ class Stack<T> {
         }
     }
 
-    // Check if empty
     boolean empty() {
         return top == -1;
     }
 
-    // Display stack
     public String toString() {
-        if (top == -1) {
-            return "Stack is empty";
-        }
+        if (top == -1) return "Stack is empty";
 
         String ans = "";
         for (int i = 0; i < top; i++) {
-            ans += String.valueOf(A.get(i)) + " -> ";
+            ans += A.get(i) + " -> ";
         }
-        ans += String.valueOf(A.get(top));
+        ans += A.get(top);
 
         return ans;
     }
 }
 
-// Main Class
 public class GenericStack {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter max size of stack: ");
+        System.out.print("Enter max size of the stack: ");
         int n = sc.nextInt();
 
         Stack<Integer> s1 = new Stack<>(n);
 
         int v;
+
         for (int i = 0; i < n; i++) {
             System.out.print("Enter element " + (i + 1) + ": ");
             v = sc.nextInt();
             s1.push(v);
         }
 
-        System.out.println("\nStack after pushing " + n + " elements:");
+        System.out.println("\nStack after pushing:");
         System.out.println(s1);
 
         s1.pop();
